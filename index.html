@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#021c1a">
+<title>دورة خريطة السوق</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Unbounded:wght@700;800&display=swap">
+<style>html{background:#021c1a}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<style>
+/* Concept: a journey drawn as a map. Night-teal hero and roadmap (glowing route, gold pin) alternate with the mint paper of the Tradenza course highlights (grid, yellow marker labels). One exit only: the course page. */
+:root{
+  --night:#021c1a; --night2:#05312e; --deep:#07524e; --teal:#0e8379; --mint:#a7f3e4; --paper:#f1fbf8; --paper2:#dff5ef; --ink:#06302d; --soft:#3f6b66;
+  --yel:#ffe500; --gold:#ffc61a; --line:rgba(167,243,228,.16); --lineL:rgba(7,82,78,.14);
+  --f:'Cairo',system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif; --fd:'Unbounded','Cairo',system-ui,sans-serif; --w:560px;
+  color-scheme:dark;
+}
+html{background:var(--night);scroll-behavior:smooth}
+body{background:var(--night);color:#fff;font-family:var(--f);margin:0;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:inherit}
+.page{max-width:var(--w);margin:0 auto;position:relative;overflow-x:clip;background:var(--night)}
+.wrap{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.mk{background:var(--yel);color:var(--ink);padding:.02em .32em;border-radius:7px;-webkit-box-decoration-break:clone;box-decoration-break:clone;text-shadow:none}
+
+/* buttons */
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:62px;padding:0 28px;border-radius:999px;background:var(--yel);color:#06302d;font:900 20px/1 var(--f);text-decoration:none;box-shadow:0 14px 38px rgba(255,229,0,.3);animation:pulse 2.8s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.7) 50%,transparent 65%);transform:translateX(-120%);animation:shine 4s ease-in-out infinite}
+.btn:active{transform:scale(.985)}
+.btn:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.btn.block{width:100%}
+.btn svg{width:22px;height:22px;flex:none;transform:rotate(180deg)}
+@keyframes pulse{0%,100%{box-shadow:0 14px 38px rgba(255,229,0,.24),0 0 0 0 rgba(255,229,0,.4)}50%{box-shadow:0 14px 44px rgba(255,229,0,.42),0 0 0 14px rgba(255,229,0,0)}}
+@keyframes shine{0%,55%{transform:translateX(-120%)}85%,100%{transform:translateX(120%)}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;isolation:isolate;overflow:hidden;min-height:max(100svh,calc(min(100vw,560px) * 2.35));background:radial-gradient(90% 50% at 70% 62%,rgba(255,198,26,.2),transparent 70%),radial-gradient(130% 70% at 85% 0%,#0f7a72 0%,#08463f 36%,var(--night) 100%)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:46px 46px;opacity:.5;-webkit-mask-image:linear-gradient(#000,transparent 80%);mask-image:linear-gradient(#000,transparent 80%)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.hero .wrap{position:relative;z-index:2;padding-top:22px;padding-bottom:20px}
+.top{display:flex;align-items:center;justify-content:space-between}
+.top img{width:62px;height:62px;object-fit:contain;filter:drop-shadow(0 4px 16px rgba(0,0,0,.45))}
+.top span{font-size:13px;font-weight:800;letter-spacing:.06em;color:var(--mint);border:1px solid var(--line);padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.04)}
+.kick{margin:34px 0 0;font-size:17px;font-weight:700;color:#d4efe9}
+.kick .mk{font-weight:900;font-size:18px}
+.hero h1{margin:14px 0 0;font-size:clamp(35px,10.8vw,58px);line-height:1.2;font-weight:900;text-wrap:balance}
+.hero h1 s{position:relative;text-decoration:none;color:#9bbdb8;display:inline-block}
+.hero h1 s::after{content:"";position:absolute;right:-4%;left:-4%;top:54%;height:.11em;background:var(--yel);border-radius:4px;transform-origin:right;transform:scaleX(0);animation:strike .7s .9s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes strike{to{transform:scaleX(1)}}
+.hero h1 .mk{font-size:.94em;display:inline-block;margin-top:6px;background:linear-gradient(var(--yel),var(--yel)) right center/0% 100% no-repeat;color:#fff;animation:mkgrow .9s 1.5s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes mkgrow{to{background-size:100% 100%;color:var(--ink)}}
+.hero .lead{margin:18px 0 0;font-size:17.5px;color:#cfe8e4;max-width:30em}
+.hero .cta{margin-top:26px;display:flex;flex-direction:column;gap:10px}
+.hero .cta small{text-align:center;font-size:13.5px;color:#d4efe9;text-shadow:0 1px 10px #000}
+.mapw{position:absolute;z-index:1;left:50%;bottom:-2%;width:128%;transform:translateX(-50%);pointer-events:none}
+.mapw img{display:block;width:100%;height:auto;animation:bob 7s ease-in-out infinite alternate;filter:drop-shadow(0 -10px 40px rgba(255,198,26,.25))}
+@keyframes bob{from{transform:translateY(0) scale(1)}to{transform:translateY(-10px) scale(1.02)}}
+.ring{position:absolute;left:68%;top:27%;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:50%;border:2px solid var(--yel);animation:ring 2.4s ease-out infinite;opacity:0}
+.ring.r2{animation-delay:1.2s}
+@keyframes ring{0%{transform:scale(.3);opacity:.9}100%{transform:scale(2.6);opacity:0}}
+.rise>*{animation:rise .85s both cubic-bezier(.2,.8,.2,1)}
+.rise>*:nth-child(1){animation-delay:.05s}.rise>*:nth-child(2){animation-delay:.2s}.rise>*:nth-child(3){animation-delay:.35s}.rise>*:nth-child(4){animation-delay:.5s}.rise>*:nth-child(5){animation-delay:.65s}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+/* stats */
+.stats{position:relative;z-index:3;margin-top:-1px;padding-top:6px;padding-bottom:34px;background:linear-gradient(var(--night),var(--night2))}
+.stats .g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stats .g div{text-align:center;padding:16px 6px 14px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.stats b{display:block;font:800 30px/1 var(--fd);color:var(--yel)}
+.stats span{display:block;margin-top:8px;font-size:13px;color:#cfe8e4;font-weight:700;line-height:1.4}
+
+/* generic sections */
+.sec{position:relative;padding-top:70px;padding-bottom:70px}
+.light{background:var(--paper);color:var(--ink);color-scheme:light}
+.light.p2{background:var(--paper2)}
+.light::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--lineL) 1px,transparent 1px),linear-gradient(90deg,var(--lineL) 1px,transparent 1px);background-size:56px 56px;opacity:.45;-webkit-mask-image:linear-gradient(#000,transparent 70%);mask-image:linear-gradient(#000,transparent 70%)}
+.sec>.wrap{position:relative}
+.tagl{display:inline-block;margin:0;font-size:15px;font-weight:900;background:var(--yel);color:var(--ink);padding:4px 14px;border-radius:7px}
+.sec h2{margin:16px 0 0;font-size:clamp(28px,8vw,38px);line-height:1.6;font-weight:900;text-wrap:balance}
+.light h2{color:var(--deep)}
+.sec .lead{margin:14px 0 0;font-size:17.5px;color:inherit;opacity:.88}
+.dark .lead{color:#cfe8e4}
+.dark{background:linear-gradient(180deg,var(--night2),var(--night))}
+
+/* pain */
+.pain{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
+.pain div{background:#fff;border:1px solid var(--lineL);border-radius:22px;padding:16px 14px 18px;box-shadow:0 10px 30px rgba(7,82,78,.08)}
+.pain i{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:var(--deep)}
+.pain i svg{width:24px;height:24px}
+.pain b{display:block;margin-top:12px;font-size:17px;line-height:1.3;color:var(--deep)}
+.pain p{margin:6px 0 0;font-size:14.5px;line-height:1.6;color:var(--soft)}
+.truth{position:relative;margin-top:26px;padding:26px 22px;border-radius:26px;background:linear-gradient(155deg,#0b6a63,#042b28);color:#fff;box-shadow:0 24px 60px rgba(4,43,40,.35);overflow:hidden}
+.truth::after{content:"";position:absolute;width:220px;height:220px;left:-60px;bottom:-90px;border-radius:50%;background:radial-gradient(circle,rgba(255,229,0,.28),transparent 70%)}
+.truth p{margin:0;font-size:clamp(23px,6.6vw,30px);line-height:1.5;font-weight:900;text-wrap:balance;position:relative;z-index:1}
+.truth small{display:block;margin-top:12px;font-size:15px;color:#cfe8e4;position:relative;z-index:1}
+
+/* schools */
+.sch{display:grid;gap:14px;margin-top:28px}
+.sch>div{display:grid;grid-template-columns:84px 1fr;gap:16px;align-items:center;background:#fff;border:1px solid var(--lineL);border-radius:24px;padding:14px 16px;box-shadow:0 10px 30px rgba(7,82,78,.08)}
+.sch svg{width:84px;height:84px;background:linear-gradient(160deg,#0b6a63,#042b28);border-radius:20px}
+.sch b{display:block;font-size:19px;color:var(--deep);line-height:1.3}
+.sch p{margin:4px 0 0;font-size:14.5px;line-height:1.6;color:var(--soft)}
+.vp rect{transform-origin:0 50%;animation:vp 3s ease-in-out infinite alternate}
+.vp rect:nth-child(2){animation-delay:.2s}.vp rect:nth-child(3){animation-delay:.4s}.vp rect:nth-child(4){animation-delay:.6s}.vp rect:nth-child(5){animation-delay:.8s}
+@keyframes vp{from{transform:scaleX(.45)}to{transform:scaleX(1)}}
+.cd line,.cd rect{animation:cd 3.2s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+.cd g:nth-child(2) *{animation-delay:.3s}.cd g:nth-child(3) *{animation-delay:.6s}.cd g:nth-child(4) *{animation-delay:.9s}
+@keyframes cd{from{transform:scaleY(.7)}to{transform:scaleY(1.12)}}
+.wv path{stroke-dasharray:240;stroke-dashoffset:240;animation:wv 3.6s ease-in-out infinite}
+@keyframes wv{0%{stroke-dashoffset:240}60%,100%{stroke-dashoffset:0}}
+
+/* roadmap */
+.road{position:relative;margin-top:30px;aspect-ratio:360/1560}
+.road svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.st{position:absolute;display:flex;align-items:center;gap:9px;max-width:56%;padding:7px 14px 7px 8px;border-radius:999px;font-size:15.5px;font-weight:800;line-height:1.3;color:#9fc4be;background:rgba(255,255,255,.05);border:1px solid var(--line);transform:translateY(-50%);transition:.5s}
+.st b{flex:none;display:grid;place-items:center;min-width:34px;height:34px;border-radius:50%;font:800 12.5px/1 var(--fd);color:#9fc4be;background:rgba(255,255,255,.07);transition:.5s}
+.st.on{color:#fff;background:rgba(14,131,121,.5);border-color:rgba(255,229,0,.55);box-shadow:0 0 30px rgba(255,229,0,.18)}
+.st.on b{background:var(--yel);color:var(--ink)}
+.st.last.on{background:rgba(255,229,0,.18)}
+.flag{margin-top:14px;text-align:center;font-weight:800;color:var(--mint);font-size:15.5px}
+
+/* inside the course */
+.units{display:grid;gap:12px;margin-top:28px}
+.units>div{display:grid;grid-template-columns:46px 1fr;gap:14px;background:#fff;border:1px solid var(--lineL);border-radius:22px;padding:16px;box-shadow:0 10px 28px rgba(7,82,78,.07)}
+.units b.n{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--deep);color:var(--yel);font:800 15px/1 var(--fd)}
+.units h3{margin:0;font-size:18px;color:var(--deep);line-height:1.35}
+.units p{margin:4px 0 0;font-size:14.8px;line-height:1.65;color:var(--soft)}
+
+/* coach */
+.coach{display:grid;justify-items:center;text-align:center}
+.coach img{width:min(62vw,250px);height:auto;border-radius:50%;box-shadow:0 22px 60px rgba(7,82,78,.3);animation:float 6s ease-in-out infinite alternate}
+@keyframes float{to{transform:translateY(-8px)}}
+.coach h2{margin-top:20px}
+.coach .role{margin:8px 0 0;font-size:17px;font-weight:800;color:var(--ink)}
+.coach p.t{margin:12px 0 0;max-width:30em;font-size:16.5px;color:var(--soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0 0;padding:0;list-style:none}
+.chips li{padding:8px 16px;border-radius:999px;font-weight:800;font-size:14.5px;background:var(--deep);color:#fff}
+
+/* outcome (dark) */
+.goals{display:grid;gap:12px;margin-top:28px}
+.goals div{display:flex;gap:14px;align-items:center;padding:16px 18px;border-radius:22px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-size:18px;font-weight:800}
+.goals svg{width:32px;height:32px;flex:none}
+.note{margin:18px 2px 0;font-size:13.5px;color:#9fc4be;line-height:1.7}
+
+/* for whom */
+.for{display:grid;gap:12px;margin-top:28px}
+.for div{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--lineL);border-radius:22px;padding:16px 18px;font-size:17px;font-weight:800;color:var(--deep);box-shadow:0 10px 28px rgba(7,82,78,.07)}
+.for svg{width:30px;height:30px;flex:none}
+
+/* booking */
+.book{padding-bottom:150px;overflow:hidden;isolation:isolate;background:radial-gradient(110% 50% at 50% 0%,#0f7a72 0%,#06403c 40%,var(--night) 100%)}
+.book::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:46px 46px;opacity:.4;-webkit-mask-image:linear-gradient(#000,transparent 70%);mask-image:linear-gradient(#000,transparent 70%)}
+.book h2{font-size:clamp(30px,8.6vw,42px);margin:0;line-height:1.6;font-weight:900;text-wrap:balance}
+.card{margin-top:28px;border-radius:28px;padding:24px 20px;background:linear-gradient(160deg,rgba(255,255,255,.1),rgba(255,255,255,.04));border:1.5px solid rgba(255,229,0,.5);box-shadow:0 30px 70px rgba(0,0,0,.45),0 0 60px rgba(255,229,0,.1)}
+.card h3{margin:0;font-size:19px;line-height:1.4;color:#fff}
+.price{display:flex;align-items:baseline;gap:8px;margin:14px 0 0}
+.price b{font:800 56px/1 var(--fd);color:var(--yel)}
+.price span{font-size:15px;color:#cfe8e4;font-weight:700}
+.inc{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.inc li{display:flex;gap:10px;align-items:flex-start;font-size:16px;font-weight:700}
+.inc svg{width:22px;height:22px;flex:none;margin-top:3px}
+.card .btn{margin-top:22px;min-height:68px;font-size:22px}
+.card .micro{margin:12px 0 0;text-align:center;font-size:13.5px;color:#cfe8e4}
+.pay{margin:16px 0 0;text-align:center;font-size:13.5px;color:#9fc4be}
+.risk{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;line-height:1.8;color:#86aaa4}
+
+/* docked bar */
+.bar{position:fixed;z-index:50;left:50%;bottom:0;width:min(100%,var(--w));transform:translate(-50%,120%);transition:transform .45s cubic-bezier(.2,.8,.2,1);padding:26px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:linear-gradient(to top,rgba(2,28,26,.97) 55%,rgba(2,28,26,0));pointer-events:none}
+.bar.on{transform:translate(-50%,0)}
+.bar .btn{pointer-events:auto;width:100%;min-height:58px;font-size:19px}
+.bar .pr{font:800 15px/1 var(--fd);background:var(--ink);color:var(--yel);padding:8px 12px;border-radius:999px}
+
+/* reveal */
+.rv{transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.rv.pre{opacity:0;transform:translateY(26px)}
+@media (min-width:600px){.pain{grid-template-columns:repeat(4,1fr)}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .hero h1 s::after{transform:scaleX(1)}
+  .hero h1 .mk{background-size:100% 100%;color:var(--ink)}
+  .rv.pre{opacity:1;transform:none}
+}
+.vp rect{transform-box:fill-box}
+.units .en{direction:ltr;unicode-bidi:isolate;display:block;text-align:right;font:700 12px/1.4 var(--fd);color:#3f6b66;margin-top:2px}
+
+.sdot{fill:#05312e;stroke:#3ff0d6;stroke-width:3;transition:.4s}
+.sdot.on{fill:#ffe500;stroke:#fff}
+
+
+/* ============ laptop / desktop layout (>= 900px). Phone layout above stays as is ============ */
+@media (min-width:900px){
+  .page{max-width:none}
+  .wrap{max-width:1240px;margin-inline:auto;padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}
+  .sec{padding-top:100px;padding-bottom:100px}
+  .sec h2{font-size:clamp(34px,3.3vw,48px);line-height:1.5;max-width:20em}
+  .sec .lead{font-size:19.5px;max-width:36em}
+  .tagl{font-size:16px}
+
+  /* hero: copy on the right, the map on the left */
+  .hero{display:flex;flex-direction:column;min-height:min(100svh,840px)}
+  .hero .wrap{width:100%;flex:1;display:flex;flex-direction:column;padding-top:30px;padding-bottom:70px}
+  .top{margin-bottom:auto}
+  .top img{width:76px;height:76px}.top span{font-size:14.5px;padding:7px 18px}
+  .hero .wrap>:not(.top){max-width:600px}
+  .kick{margin-top:30px;font-size:20px}.kick .mk{font-size:21px}
+  .hero h1{font-size:clamp(46px,4.5vw,70px)}
+  .hero .lead{font-size:20px;max-width:27em}
+  .hero .cta{margin-top:34px;margin-bottom:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:12px 22px}
+  .hero .cta .btn.block{width:auto;min-width:340px}
+  .hero .cta small{text-align:start;font-size:15px}
+  .mapw{left:26%;bottom:auto;top:50%;width:min(700px,50vw);margin-top:calc(min(700px,50vw) * -.373)}
+  .mapw img{-webkit-mask-image:radial-gradient(closest-side at 50% 50%,#000 58%,transparent 100%);mask-image:radial-gradient(closest-side at 50% 50%,#000 58%,transparent 100%)}
+
+  /* stats */
+  .stats{padding-top:14px;padding-bottom:50px}
+  .stats .g{gap:20px;max-width:1000px;margin-inline:auto}
+  .stats .g div{padding:26px 14px 22px;border-radius:24px}
+  .stats b{font-size:46px}.stats span{font-size:15.5px;margin-top:10px}
+
+  /* pain */
+  .pain{gap:18px;margin-top:40px}
+  .pain div{padding:24px 22px 26px;border-radius:26px}
+  .pain i{width:52px;height:52px}.pain b{font-size:20px;margin-top:16px}.pain p{font-size:15.5px}
+  .truth{margin-top:34px;padding:40px 44px;border-radius:32px}
+  .truth p{font-size:clamp(28px,2.7vw,38px);max-width:22em}
+  .truth small{font-size:17px;margin-top:16px}
+
+  /* three schools */
+  .sch{grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+  .sch>div{grid-template-columns:1fr;gap:18px;padding:24px;border-radius:28px;align-items:start}
+  .sch svg{width:96px;height:96px}
+  .sch b{font-size:22px}.sch p{font-size:15.5px}
+
+  /* roadmap: sticky heading right, route left */
+  .rdw{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,520px);column-gap:90px;align-items:start}
+  .rdh{position:sticky;top:max(120px,18svh)}
+  .rdh h2{max-width:12em}
+  .rdr{width:100%}
+  .flag{font-size:17px;margin-top:24px}
+  .st{font-size:16.5px}
+
+  /* course units: 3 + 2 */
+  .units{grid-template-columns:repeat(6,1fr);gap:18px;margin-top:40px}
+  .units>div{grid-column:span 2;grid-template-columns:1fr;gap:16px;padding:24px;border-radius:26px;align-content:start}
+  .units>div:nth-child(n+4){grid-column:span 3}
+  .units h3{font-size:21px}.units p{font-size:15.5px}
+
+  /* coach: text right, portrait left */
+  .coach{grid-template-columns:minmax(0,1fr) 340px;column-gap:80px;justify-items:start;text-align:start;align-items:center}
+  .coach>*{grid-column:1}
+  .coach img{grid-column:2;grid-row:1 / span 6;width:340px;max-width:100%;margin-top:0!important}
+  .coach h2{font-size:clamp(38px,3.8vw,54px)}
+  .coach .role{font-size:20px}.coach p.t{font-size:18px}
+  .chips{justify-content:flex-start;margin-top:22px}.chips li{font-size:16px;padding:9px 20px}
+
+  /* goals + for whom: 2 x 2 */
+  .goals,.for{grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
+  .goals div{padding:26px 26px;font-size:21px}.goals svg{width:38px;height:38px}
+  .for div{padding:26px 26px;font-size:19px;border-radius:26px}.for svg{width:36px;height:36px}
+  .note{font-size:15px;margin-top:22px}
+
+  /* booking: pitch right, price card left */
+  .book{padding-bottom:110px}
+  .book .wrap{max-width:1120px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);column-gap:80px;align-items:center}
+  .bkh{grid-column:1;grid-row:1}
+  .book h2{font-size:clamp(38px,3.8vw,54px)}
+  .book .card{grid-column:2;grid-row:1;margin-top:0;padding:34px 32px;border-radius:32px}
+  .card h3{font-size:22px}.price b{font-size:68px}.inc li{font-size:17px}
+  .book .risk{grid-column:1 / -1;grid-row:2;max-width:900px;margin-top:64px}
+
+  /* docked bar: compact pill */
+  .bar{width:min(100%,540px)}
+}
+@media (min-width:1500px){
+  .hero h1{font-size:76px}
+}
+</style>
+</head>
+<body>
+<div class="page" dir="rtl" lang="ar">
+
+<header class="hero">
+  <canvas id="dust" aria-hidden="true"></canvas>
+  <div class="wrap rise">
+    <div class="top"><img src="assets/logo.png" width="62" height="62" alt="تريدينزا"><span>دورة تدريبية</span></div>
+    <p class="kick"><span class="mk">خريطة السوق</span> مع عبدالرحمن أبو عطية</p>
+    <h1>توقّف عن <s>تخمين</s> السوق.<br><span class="mk">تعلّم قراءة خريطته.</span></h1>
+    <p class="lead">10 محطات تنقلك من شارت لا تفهمه إلى قراءة حركة السعر والسيولة واتجاه السوق الحقيقي، بطريقة المحترفين.</p>
+    <div class="cta">
+      <a class="btn block" href="https://tradenza.io/product/market-map-course/" rel="noopener"><span>احجز مكانك في الدورة</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <small>تُحجز من صفحة الدورة الرسمية على تريدينزا</small>
+    </div>
+  </div>
+  <div class="mapw"><img src="assets/map.webp" width="1200" height="896" alt=""><i class="ring"></i><i class="ring r2"></i></div>
+</header>
+
+<section class="stats">
+  <div class="wrap"><div class="g">
+    <div class="rv"><b data-count="10">10</b><span>محطات في رحلة التعلّم</span></div>
+    <div class="rv" style="--d:.08s"><b data-count="3">3</b><span>مدارس: فوليوم بروفايل، برايس أكشن، تحليل موجي</span></div>
+    <div class="rv" style="--d:.16s"><b>2019</b><span>يتداول ويحلل فيها المدرب منذ</span></div>
+  </div></div>
+</section>
+
+<section class="sec light">
+  <div class="wrap">
+    <p class="tagl rv">هل تعرف هذا الشعور؟</p>
+    <h2 class="rv">تفتح الشارت كل يوم، ولا تزال النتائج غير مستقرة.</h2>
+    <div class="pain">
+      <div class="rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="#ffe500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></i><b>توصيات عشوائية</b><p>تدخل صفقة بتوصية، ولا تعرف على ماذا بُنيت.</p></div>
+      <div class="rv" style="--d:.07s"><i><svg viewBox="0 0 24 24" fill="none" stroke="#ffe500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h14"/><circle cx="9" cy="6" r="2" fill="#07524e"/><circle cx="15" cy="12" r="2" fill="#07524e"/><circle cx="8" cy="18" r="2" fill="#07524e"/></svg></i><b>مؤشر بعد مؤشر</b><p>تتعلم أداة جديدة كل أسبوع، والصورة لا تزال غير واضحة.</p></div>
+      <div class="rv" style="--d:.14s"><i><svg viewBox="0 0 24 24" fill="none" stroke="#ffe500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v3M7 17v3M17 8v3M17 20v1"/><rect x="5" y="7" width="4" height="10" rx="1"/><rect x="15" y="11" width="4" height="9" rx="1"/></svg></i><b>شموع بلا قصة</b><p>ترى السعر يتحرك، ولا تقرأ السيولة والاتجاه خلفه.</p></div>
+      <div class="rv" style="--d:.21s"><i><svg viewBox="0 0 24 24" fill="none" stroke="#ffe500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h10M7 21h10M8 3c0 6 8 6 8 9s-8 3-8 9M16 3c0 6-8 6-8 9"/></svg></i><b>قرار متردد</b><p>تدخل وأنت متردد، وتخرج دون أن تفهم ما حدث.</p></div>
+    </div>
+    <div class="truth rv"><p>المشكلة ليست قلّة المؤشرات. <span class="mk">المشكلة أنك تتداول بلا خريطة.</span></p><small>وهذا ما تبنيه لك هذه الدورة.</small></div>
+  </div>
+</section>
+
+<section class="sec light p2">
+  <div class="wrap">
+    <p class="tagl rv">ما الذي تقدمه الدورة؟</p>
+    <h2 class="rv">ليست شرح مؤشرات. <span class="mk">رحلة لفهم السوق كما يقرؤه المحترفون.</span></h2>
+    <p class="lead rv">تقرأ حركة السعر والسيولة واتجاه السوق الحقيقي، بدل الاعتماد على استراتيجيات مكررة. وتركّز الدورة على ثلاث مدارس:</p>
+    <div class="sch">
+      <div class="rv"><svg class="vp" viewBox="0 0 84 84" aria-hidden="true"><rect x="14" y="14" width="40" height="8" rx="4" fill="#a7f3e4"/><rect x="14" y="28" width="56" height="8" rx="4" fill="#ffe500"/><rect x="14" y="42" width="34" height="8" rx="4" fill="#a7f3e4"/><rect x="14" y="56" width="48" height="8" rx="4" fill="#ffe500" opacity=".85"/><rect x="14" y="70" width="26" height="6" rx="3" fill="#a7f3e4" opacity=".7"/></svg><div><b>الفوليوم بروفايل</b><p>تفهم أماكن السيولة والتجميع والتوزيع، وتحدد المناطق المهمة.</p></div></div>
+      <div class="rv" style="--d:.08s"><svg class="cd" viewBox="0 0 84 84" aria-hidden="true"><g><line x1="16" y1="26" x2="16" y2="66" stroke="#a7f3e4" stroke-width="2.5"/><rect x="11" y="38" width="10" height="20" rx="2" fill="#a7f3e4"/></g><g><line x1="34" y1="18" x2="34" y2="60" stroke="#ffe500" stroke-width="2.5"/><rect x="29" y="26" width="10" height="24" rx="2" fill="#ffe500"/></g><g><line x1="52" y1="30" x2="52" y2="70" stroke="#a7f3e4" stroke-width="2.5"/><rect x="47" y="40" width="10" height="22" rx="2" fill="#a7f3e4"/></g><g><line x1="70" y1="12" x2="70" y2="52" stroke="#ffe500" stroke-width="2.5"/><rect x="65" y="20" width="10" height="26" rx="2" fill="#ffe500"/></g></svg><div><b>البرايس أكشن</b><p>تفهم حركة السعر وسلوك الشموع والاختراقات والارتدادات، وتبني سيناريوهات تداول.</p></div></div>
+      <div class="rv" style="--d:.16s"><svg class="wv" viewBox="0 0 84 84" aria-hidden="true"><path d="M10 64L24 38L36 52L50 24L62 42L76 16" fill="none" stroke="#ffe500" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 72H76" stroke="#a7f3e4" stroke-opacity=".5" stroke-width="2"/></svg><div><b>التحليل الموجي</b><p>تقرأ الموجات واتجاه السوق ومراحل الحركة السعرية.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec dark" style="padding-bottom:50px">
+  <div class="wrap rdw"><div class="rdh">
+    <p class="tagl rv">خريطة رحلتك</p>
+    <h2 class="rv">10 محطات. كل محطة تقرّبك من قراءة السوق.</h2>
+    <p class="lead rv">انزل ببطء، وشاهد الرحلة تتشكل أمامك.</p></div>
+    <div class="rdr"><div class="road" id="road">
+<svg viewBox="0 0 360 1560" aria-hidden="true">
+<defs><filter id="gl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter></defs>
+<path d="M180 0 C180 70 100 60 100 130 C100 208 260 200 260 278 C260 356 100 348 100 426 C100 504 260 496 260 574 C260 652 100 644 100 722 C100 800 260 792 260 870 C260 948 100 940 100 1018 C100 1096 260 1088 260 1166 C260 1244 100 1236 100 1314 C100 1392 260 1384 260 1462" fill="none" stroke="#14877c" stroke-opacity=".35" stroke-width="42" stroke-linecap="round"/>
+<path id="rp" d="M180 0 C180 70 100 60 100 130 C100 208 260 200 260 278 C260 356 100 348 100 426 C100 504 260 496 260 574 C260 652 100 644 100 722 C100 800 260 792 260 870 C260 948 100 940 100 1018 C100 1096 260 1088 260 1166 C260 1244 100 1236 100 1314 C100 1392 260 1384 260 1462" fill="none" stroke="#0a4a45" stroke-width="32" stroke-linecap="round"/>
+<path d="M180 0 C180 70 100 60 100 130 C100 208 260 200 260 278 C260 356 100 348 100 426 C100 504 260 496 260 574 C260 652 100 644 100 722 C100 800 260 792 260 870 C260 948 100 940 100 1018 C100 1096 260 1088 260 1166 C260 1244 100 1236 100 1314 C100 1392 260 1384 260 1462" fill="none" stroke="#3ff0d6" stroke-opacity=".5" stroke-width="2.5" stroke-dasharray="9 12" stroke-linecap="round"/>
+<path d="M180 0 C180 70 100 60 100 130 C100 208 260 200 260 278 C260 356 100 348 100 426 C100 504 260 496 260 574 C260 652 100 644 100 722 C100 800 260 792 260 870 C260 948 100 940 100 1018 C100 1096 260 1088 260 1166 C260 1244 100 1236 100 1314 C100 1392 260 1384 260 1462" fill="none" stroke="#ffe500" stroke-width="10" stroke-linecap="round" filter="url(#gl)" opacity=".6" id="rg2"/>
+<path id="rg" d="M180 0 C180 70 100 60 100 130 C100 208 260 200 260 278 C260 356 100 348 100 426 C100 504 260 496 260 574 C260 652 100 644 100 722 C100 800 260 792 260 870 C260 948 100 940 100 1018 C100 1096 260 1088 260 1166 C260 1244 100 1236 100 1314 C100 1392 260 1384 260 1462" fill="none" stroke="#ffe500" stroke-width="5" stroke-linecap="round"/>
+<circle class="sdot" cx="100" cy="130" r="15"/><circle class="sdot" cx="260" cy="278" r="15"/><circle class="sdot" cx="100" cy="426" r="15"/><circle class="sdot" cx="260" cy="574" r="15"/><circle class="sdot" cx="100" cy="722" r="15"/><circle class="sdot" cx="260" cy="870" r="15"/><circle class="sdot" cx="100" cy="1018" r="15"/><circle class="sdot" cx="260" cy="1166" r="15"/><circle class="sdot" cx="100" cy="1314" r="15"/><circle class="sdot" cx="260" cy="1462" r="15"/>
+<g id="pin"><g transform="translate(0 -4)"><ellipse cx="0" cy="4" rx="11" ry="4" fill="rgba(0,0,0,.4)"/>
+<path d="M0 2C-9-14-19-22-19-34a19 19 0 1 1 38 0C19-22 9-14 0 2z" fill="#ffc61a" stroke="#fff" stroke-width="2.5"/><circle cx="0" cy="-34" r="7" fill="#06302d"/></g></g>
+</svg><div class="st" style="top:8.33%;left:calc(27.78% + 28px)"><b>01</b><span>مفاهيم السوق</span></div><div class="st" style="top:17.82%;right:calc(27.78% + 28px)"><b>02</b><span>تحليل الاتجاه</span></div><div class="st" style="top:27.31%;left:calc(27.78% + 28px)"><b>03</b><span>مستويات الدعم والمقاومة</span></div><div class="st" style="top:36.79%;right:calc(27.78% + 28px)"><b>04</b><span>حركة السعر</span></div><div class="st" style="top:46.28%;left:calc(27.78% + 28px)"><b>05</b><span>السيولة</span></div><div class="st" style="top:55.77%;right:calc(27.78% + 28px)"><b>06</b><span>الفوليوم بروفايل</span></div><div class="st" style="top:65.26%;left:calc(27.78% + 28px)"><b>07</b><span>التحليل الموجي</span></div><div class="st" style="top:74.74%;right:calc(27.78% + 28px)"><b>08</b><span>التصحيحات</span></div><div class="st" style="top:84.23%;left:calc(27.78% + 28px)"><b>09</b><span>الانحراف (الدايفرجنس)</span></div><div class="st last" style="top:93.72%;right:calc(27.78% + 28px)"><b>10</b><span>تطبيق عملي</span></div></div>
+    <p class="flag rv">وفي المحطة الأخيرة تطبّق كل ما تعلمته على الشارت.</p></div>
+  </div>
+</section>
+
+<section class="sec light">
+  <div class="wrap">
+    <p class="tagl rv">داخل الدورة</p>
+    <h2 class="rv">5 وحدات تبني فهمك خطوة بخطوة.</h2>
+    <div class="units"><div class="rv" style="--d:0.00s"><b class="n">01</b><div><h3>الفوليوم بروفايل</h3><span class="en">Volume Profile</span><p>تتعلم فهم أماكن السيولة والتجميع والتوزيع، وتحديد المناطق المهمة.</p></div></div><div class="rv" style="--d:0.06s"><b class="n">02</b><div><h3>البرايس أكشن</h3><span class="en">Price Action</span><p>تفهم حركة السعر وسلوك الشموع والاختراقات والارتدادات، وتبني سيناريوهات تداول.</p></div></div><div class="rv" style="--d:0.12s"><b class="n">03</b><div><h3>التحليل الموجي</h3><span class="en">Waves</span><p>تقرأ الموجات واتجاه السوق ومراحل الحركة السعرية.</p></div></div><div class="rv" style="--d:0.18s"><b class="n">04</b><div><h3>التصحيحات</h3><span class="en">Corrections</span><p>تميّز بين التصحيح الحقيقي وانعكاس الاتجاه لتتجنب الدخول الخاطئ.</p></div></div><div class="rv" style="--d:0.24s"><b class="n">05</b><div><h3>الدايفرجنس والمؤشرات</h3><span class="en">Divergence &amp; Indicators</span><p>تستخدم الاختلافات والمؤشرات أداة دعم للتحليل، لا اعتماداً كاملاً عليها.</p></div></div></div>
+  </div>
+</section>
+
+<section class="sec light p2">
+  <div class="wrap coach">
+    <p class="tagl rv">مع من ستتعلم؟</p>
+    <img class="rv" src="assets/coach.webp" width="640" height="640" alt="عبدالرحمن أبو عطية" style="margin-top:22px">
+    <h2 class="rv">عبدالرحمن أبو عطية</h2>
+    <p class="role rv">متداول ومحلل محترف في سوق العملات الرقمية منذ 2019</p>
+    <p class="t rv">هذه الدورة هي خلاصة سنوات من التجربة العملية داخل السوق، وتركّز على ثلاث مدارس:</p>
+    <ul class="chips rv"><li>الفوليوم بروفايل</li><li>البرايس أكشن</li><li>التحليل الموجي</li></ul>
+  </div>
+</section>
+
+<section class="sec dark">
+  <div class="wrap">
+    <p class="tagl rv">هدف الدورة</p>
+    <h2 class="rv">أن ترى الشارت بعين المحترف.</h2>
+    <div class="goals">
+      <div class="rv"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffe500"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#06302d" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>تفهم حركة السوق</span></div>
+      <div class="rv" style="--d:.07s"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffe500"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#06302d" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>تتعلم طريقة تفكير المتداول المحترف</span></div>
+      <div class="rv" style="--d:.14s"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffe500"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#06302d" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>تبني رؤية أوضح للشارت</span></div>
+      <div class="rv" style="--d:.21s"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffe500"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#06302d" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>تتخذ قراراتك بثقة أكبر</span></div>
+    </div>
+    <p class="note rv">هذه أهداف الدورة التعليمية. النتائج في التداول تختلف من شخص لآخر، ولا يوجد ما يضمن الربح.</p>
+  </div>
+</section>
+
+<section class="sec light">
+  <div class="wrap">
+    <p class="tagl rv">لمن هذه الدورة؟</p>
+    <h2 class="rv">إذا وجدت نفسك هنا، فهي لك.</h2>
+    <div class="for">
+      <div class="rv"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#07524e"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#ffe500" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>مبتدئ يريد البدء بالطريقة الصحيحة</span></div>
+      <div class="rv" style="--d:.07s"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#07524e"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#ffe500" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>متداول عنده خبرة لكن نتائجه غير مستقرة</span></div>
+      <div class="rv" style="--d:.14s"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#07524e"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#ffe500" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>تريد فهم السوق بعمق بعيداً عن التوصيات العشوائية</span></div>
+      <div class="rv" style="--d:.21s"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#07524e"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#ffe500" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>تبحث عن طريقة تفكير احترافية في قراءة الشارت</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec book" id="book">
+  <div class="wrap">
+    <div class="bkh"><p class="tagl rv">احجز مكانك</p>
+    <h2 class="rv" style="margin-top:16px">كم صفقة أخرى ستدخلها <span class="mk">بدون خريطة؟</span></h2></div>
+    <div class="card rv">
+      <h3>دورة خريطة السوق مع عبدالرحمن أبو عطية</h3>
+      <div class="price"><b>250$</b><span>سعر الدورة بالدولار الأمريكي</span></div>
+      <ul class="inc">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffe500"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#06302d" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>10 محطات تنقلك من المفاهيم إلى التطبيق العملي</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffe500"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#06302d" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>5 وحدات: فوليوم بروفايل، برايس أكشن، تحليل موجي، تصحيحات، دايفرجنس ومؤشرات</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffe500"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#06302d" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>خلاصة سنوات من التجربة العملية داخل السوق</span></li>
+      </ul>
+      <a class="btn block" href="https://tradenza.io/product/market-map-course/" rel="noopener"><span>احجز مكانك الآن</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <p class="micro">ستنتقل إلى صفحة الدورة الرسمية على تريدينزا لإتمام الحجز.</p>
+      <p class="pay">الدفع عبر فيزا وماستركارد ومدى وباي بال</p>
+    </div>
+    <p class="risk">الدورة تعليمية ولا تقدّم نصيحة استثمارية. التداول في الأسواق المالية ينطوي على مخاطر عالية، وقد تخسر جزءاً من رأس مالك أو كله، ولا شيء يضمن الربح. الأداء السابق لا يضمن النتائج المستقبلية.</p>
+  </div>
+</section>
+
+<div class="bar" id="bar"><a class="btn" href="https://tradenza.io/product/market-map-course/" rel="noopener"><span class="pr">250$</span><span>احجز مكانك في الدورة</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+</div>
+
+<script>
+(()=>{
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const rnd=(a,b)=>a+Math.random()*(b-a),TAU=Math.PI*2;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+
+/* ---- hero dust: gold motes rising over the map ---- */
+(()=>{const cv=$('#dust');if(!cv)return;const c=cv.getContext('2d');let W=0,H=0,P=[],vis=true,last=performance.now();
+ const glow=(x,y,r,a,rgb)=>{const g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${rgb},${a})`);g.addColorStop(1,`rgba(${rgb},0)`);c.fillStyle=g;c.fillRect(x-r,y-r,2*r,2*r)};
+ const size=()=>{const r=cv.getBoundingClientRect();if(!r.width)return;const d=Math.min(devicePixelRatio||1,1.5);W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;c.setTransform(d,0,0,d,0,0);
+  P=Array.from({length:50},()=>({x:rnd(0,W),y:rnd(H*.2,H),r:rnd(.8,3),v:rnd(8,26),ph:rnd(0,TAU),g:Math.random()<.7}))};
+ size();new ResizeObserver(size).observe(cv);
+ new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(cv);
+ const draw=t=>{requestAnimationFrame(draw);if(!vis)return;const dt=Math.min(.05,(t-last)/1000);last=t;c.clearRect(0,0,W,H);c.globalCompositeOperation='lighter';const k=Math.min(W/390,1.6);
+  for(const p of P){p.y-=p.v*dt*k;if(p.y<-10){p.y=H+10;p.x=rnd(0,W)}glow(p.x+Math.sin(t/1000*.6+p.ph)*14*k,p.y,p.r*k*3.2,.2+.6*Math.abs(Math.sin(t/1000*.9+p.ph)),p.g?'255,208,90':'120,255,230')}};
+ if(RM){draw(performance.now());}else requestAnimationFrame(draw)})();
+
+/* ---- reveal ---- */
+const rv=$$('.rv');
+rv.forEach(e=>{if(e.getBoundingClientRect().top>innerHeight*.9)e.classList.add('pre')});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target)}}),{threshold:.12});
+rv.forEach(e=>io.observe(e));
+
+/* ---- counters ---- */
+$$('[data-count]').forEach(el=>{const n=+el.dataset.count;let done=false;
+ new IntersectionObserver((es,o)=>{if(es[0].isIntersecting&&!done){done=true;o.disconnect();if(RM){el.textContent=n;return}const t0=performance.now();
+  const f=t=>{const p=clamp((t-t0)/1100,0,1);el.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}},{threshold:.6}).observe(el)});
+
+/* ---- roadmap: the pin travels as you scroll ---- */
+const road=$('#road');
+if(road){const path=$('#rp',road),prog=$('#rg',road),pin=$('#pin',road),L=path.getTotalLength();
+ prog.style.strokeDasharray=L;prog.style.strokeDashoffset=L;
+ const dots=$$('.sdot',road),sts=$$('.st',road);
+ const pts=[];for(let i=0;i<=400;i++){const p=path.getPointAtLength(L*i/400);pts.push([p.x,p.y,L*i/400])}
+ const sl=dots.map(d=>{const x=+d.getAttribute('cx'),y=+d.getAttribute('cy');let b=0,bd=1e9;pts.forEach(p=>{const dd=(p[0]-x)**2+(p[1]-y)**2;if(dd<bd){bd=dd;b=p[2]}});return b});
+ const upd=()=>{const r=road.getBoundingClientRect();const p=RM?1:clamp((innerHeight*.68-r.top)/r.height*1.04,0,1);const len=L*p;
+  prog.style.strokeDashoffset=L-len;const q=path.getPointAtLength(len);pin.setAttribute('transform',`translate(${q.x} ${q.y})`);
+  sl.forEach((l,i)=>{const on=len>=l-2;dots[i].classList.toggle('on',on);sts[i].classList.toggle('on',on)})};
+ addEventListener('scroll',()=>requestAnimationFrame(upd),{passive:true});addEventListener('resize',upd);upd()}
+
+/* ---- hero parallax ---- */
+const mapw=$('.mapw');
+if(mapw&&!RM)addEventListener('scroll',()=>{const y=scrollY;if(y<1000)mapw.style.transform=`translate(-50%,${y*.14}px)`},{passive:true});
+
+/* ---- docked CTA: visible once the hero is gone, hidden while a main CTA is in view ---- */
+const bar=$('#bar'),hero=$('.hero');const inl=new Set();
+const io2=new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting?inl.add(e.target):inl.delete(e.target));upd2()},{threshold:.5});
+$$('.hero .btn,.card .btn').forEach(b=>io2.observe(b));
+function upd2(){const past=hero.getBoundingClientRect().bottom<innerHeight*.55;bar.classList.toggle('on',past&&inl.size===0)}
+addEventListener('scroll',()=>requestAnimationFrame(upd2),{passive:true});upd2();
+})();
+
+</script>
+</body>
+</html>
